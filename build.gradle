@@ -32,6 +32,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'com.auth0:java-jwt:4.2.1'
 	implementation 'org.glassfish:javax.el:3.0.0'
+	implementation 'org.springframework.security:spring-security-oauth2-resource-server:5.8.0' // 적절한 버전을 확인하세요
 	implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
 	implementation 'javax.validation:validation-api:2.0.1.Final'
 	runtimeOnly 'com.mysql:mysql-connector-j'
@@ -43,3 +44,5 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+

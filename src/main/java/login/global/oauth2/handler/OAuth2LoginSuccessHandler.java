@@ -32,7 +32,13 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             if(oAuth2User.getRole() == Role.GUEST) {
                 String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
                 response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
-                response.sendRedirect("oauth2/sign-up"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
+                response.sendRedirect("http://localhost:3000/oauth?Bearer=" + accessToken); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
+//              String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
+//                response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
+//                response.setContentType("application/json");
+//                response.getWriter().write("{\"redirectUrl\": \"http://localhost:3000/oauth2/sign-up\"}");
+//                response.getWriter().flush();
+
 
                 jwtService.sendAccessAndRefreshToken(response, accessToken, null);
 //                User findUser = userRepository.findByEmail(oAuth2User.getEmail())

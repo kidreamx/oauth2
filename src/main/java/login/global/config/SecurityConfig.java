@@ -53,6 +53,8 @@ public class SecurityConfig {
         http.formLogin(AbstractHttpConfigurer::disable);
         http.httpBasic(AbstractHttpConfigurer::disable);
         http.csrf(AbstractHttpConfigurer::disable);
+        http.cors(cors -> cors
+                .configurationSource(CorsConfig.corsConfiguration()));
         http.headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable // 또는 SAMEORIGIN으로 설정할 수 있습니다.
                         )
@@ -64,18 +66,14 @@ public class SecurityConfig {
                 );
 
                 // URL별 권한 관리
+//        http.authorizeHttpRequests(authz -> authz
+//                .anyRequest().permitAll()
+//        );
                http.authorizeHttpRequests(authz -> authz
                         .requestMatchers(
-                                new AntPathRequestMatcher("/"),
-                                new AntPathRequestMatcher("/css/**"),
-                                new AntPathRequestMatcher("/images/**"),
-                                new AntPathRequestMatcher("/js/**"),
-                                new AntPathRequestMatcher("/favicon.ico"),
-                                new AntPathRequestMatcher("/h2-console/**"),
-                                new AntPathRequestMatcher("/sign-up"),
-                                new AntPathRequestMatcher("/index.html")
-                        ).permitAll()
-                        .anyRequest().authenticated()
+                                new AntPathRequestMatcher("/jwt-test")
+                        ).authenticated()
+                        .anyRequest().permitAll()
                 );
 
                 // 소셜 로그인 설정
